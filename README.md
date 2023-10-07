@@ -24,7 +24,7 @@ cmake --build build
 
 ## Run
 ```bash
-./build/apps/app
+./build/apps/MyProject_app
 ```
 By default will create a *logs* directory in the current directory, to specify another directory use:
 ```bash
@@ -34,8 +34,6 @@ For other options, check glog documentation.
 
 ## Tests
 ```bash
-cmake -S tests -B build/tests
-cmake --build build/tests
 ./build/tests/MyProject_test
 ```
 

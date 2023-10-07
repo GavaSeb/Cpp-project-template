@@ -1,7 +1,8 @@
-#include <iostream>
 #include "gtest/gtest.h"
-#include <MyClass.hpp>
 #include <glog/logging.h>
+
+// Project Specific
+#include <MyClass.hpp>
 
 TEST(example, subtract) {
     MyClass mc;
