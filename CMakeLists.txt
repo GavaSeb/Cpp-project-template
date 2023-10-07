@@ -7,39 +7,40 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 # ---- Project ----
 
 # Note: update this to your new project's name and version
-project(
-  MyProject
-  VERSION 1.0
-  LANGUAGES CXX
+project(MyProject VERSION 0.1
+                  DESCRIPTION "This is a template project"
+                  LANGUAGES CXX
 )
+
+set(LIB_NAME ${PROJECT_NAME}_lib)
+set(TEST_NAME ${PROJECT_NAME}_test)
+
+# Only do these if this is the main project, and not if it is included through add_subdirectory
+if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
+
+  # Docs only available if this is the main app
+  find_package(Doxygen)
+  if(Doxygen_FOUND)
+    add_subdirectory(docs)
+  else()
+    message(STATUS "Doxygen not found, not building docs")
+  endif()
+endif()
+
 
 # ---- Include guards ----
 
 if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
-  message(
-    FATAL_ERROR
+  message(FATAL_ERROR
       "In-source builds not allowed. Please make a new directory (called a build directory) and run CMake from there."
   )
 endif()
 
-# ---- Add source files ----
+add_subdirectory(src)
 
-# Note: globbing sources is considered bad practice as CMake's generators may not detect new files
-# automatically. Keep that in mind when changing files, or explicitly mention them here.
-file(GLOB_RECURSE headers CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp")
-file(GLOB_RECURSE sources CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
+add_subdirectory(apps)
 
-include_directories("${CMAKE_CURRENT_SOURCE_DIR}/include")
-
-message("${headers}")
-
-# ---- thirdparties -----
-
-# Add the glog repository
-add_subdirectory(thirdparty/glog glog)
-
-add_executable(${PROJECT_NAME} ${sources} ${headers})
-
-set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 20)
-
-target_link_libraries(${PROJECT_NAME} glog)
+if((CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME OR MODERN_CMAKE_BUILD_TESTING)
+   AND BUILD_TESTING)
+  add_subdirectory(tests)
+endif()

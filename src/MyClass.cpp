@@ -1,9 +1,11 @@
 #include "MyClass.hpp"
 #include <iostream>
 
+#include <glog/logging.h>
+
 MyClass::MyClass()
 {
-    std::cout << "MyClass " << std::endl;
+    LOG(INFO) << "My Class Constructor";
 }
 
 int MyClass::foo(int a)

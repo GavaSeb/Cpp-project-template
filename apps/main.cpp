@@ -1,6 +1,8 @@
 #include <iostream>
 #include <glog/logging.h>
 
+#include "MyClass.hpp"
+
 int main(int argc, char const *argv[])
 {
     // Initialize Google’s logging library.
@@ -14,5 +16,8 @@ int main(int argc, char const *argv[])
     LOG(INFO) << "Found " << " cookies";
     LOG(WARNING) << "Something Bad";
     LOG(ERROR) << "Something Really Bad";
+
+    MyClass mc;
+    
     return 0;
 }
