@@ -12,7 +12,9 @@ project(MyProject VERSION 0.1
                   LANGUAGES CXX
 )
 
-set(LIB_NAME ${PROJECT_NAME}_lib)
+# Name the final app, lib and test app according to project name
+set(LIB_NAME ${PROJECT_NAME})
+set(APP_NAME ${PROJECT_NAME}_app)
 set(TEST_NAME ${PROJECT_NAME}_test)
 
 # Only do these if this is the main project, and not if it is included through add_subdirectory
