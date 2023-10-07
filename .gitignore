@@ -2,4 +2,9 @@
 build/
 CMakeFiles/
 
+# log folder
+log*
+
+# local stuffs
 .cache/
+.vscode/

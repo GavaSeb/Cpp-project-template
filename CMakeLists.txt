@@ -1,11 +1,10 @@
 cmake_minimum_required(VERSION 3.14...3.22)
 
-set(CMAKE_CXX_STANDARD 20)
+# Global CXX version
+set(CMAKE_CXX_STANDARD 20) # Use target_compile_features() to set specific targets standard
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
 
 # ---- Project ----
-
 # Note: update this to your new project's name and version
 project(MyProject VERSION 0.1
                   DESCRIPTION "This is a template project"
@@ -29,19 +28,19 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
   endif()
 endif()
 
-
-# ---- Include guards ----
-
 if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
   message(FATAL_ERROR
       "In-source builds not allowed. Please make a new directory (called a build directory) and run CMake from there."
   )
 endif()
 
+# add src containing the lib source files
 add_subdirectory(src)
 
+# add the apps containing the app source files
 add_subdirectory(apps)
 
+# add the tests containing the unit tests source files
 if((CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME OR MODERN_CMAKE_BUILD_TESTING)
    AND BUILD_TESTING)
   add_subdirectory(tests)
