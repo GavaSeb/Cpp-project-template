@@ -11,5 +11,5 @@ target_include_directories(${LIB_NAME} PUBLIC ../include)
 target_compile_features(${LIB_NAME} PUBLIC cxx_std_20)
 
 # Add dependencies here
-add_subdirectory(../thirdparty/glog glog)
+add_subdirectory(../dependencies/glog glog)
 target_link_libraries(${LIB_NAME} glog)

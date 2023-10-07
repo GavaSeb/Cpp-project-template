@@ -1,6 +1,6 @@
 # Add the googletest repository
-set(GTEST_DIR ${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/googletest)
-add_subdirectory(../thirdparty/googletest googletest)
+set(GTEST_DIR ${CMAKE_CURRENT_SOURCE_DIR}/dependencies/googletest)
+add_subdirectory(../dependencies/googletest googletest)
 
 enable_testing()
 
