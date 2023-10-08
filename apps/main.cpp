@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
     
     /* Start the application */
     LOG(INFO) << "--- Starting Application ---";
-    MyClass mc;
+    mynamespace::MyClass mc;
     
     return 0;
 }

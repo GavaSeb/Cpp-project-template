@@ -5,7 +5,7 @@
 #include <MyClass.hpp>
 
 TEST(example, subtract) {
-    MyClass mc;
+    mynamespace::MyClass mc;
     ASSERT_EQ(10,mc.foo(5));
 }
 
