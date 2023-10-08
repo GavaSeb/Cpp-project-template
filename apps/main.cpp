@@ -1,30 +1,85 @@
-#include <string>
-#include <filesystem>
-#include <glog/logging.h>
+#include <wx/wx.h>
 
-// Project specific
-#include "MyClass.hpp"
+class MyApp : public wxApp
+{
+public:
+    bool OnInit() override;
+};
 
-// Default path of the log directory if not specified with --log_dir
-const std::string DEFAULT_LOG_PATH{ "./logs" };
+class MyFrame : public wxFrame
+{
+public:
+    MyFrame();
+ 
+private:
+    void OnHello(wxCommandEvent& event);
+    void OnExit(wxCommandEvent& event);
+    void OnAbout(wxCommandEvent& event);
+};
+ 
+enum
+{
+    ID_Hello = 1
+};
+ 
+bool MyApp::OnInit()
+{
+    MyFrame *frame = new MyFrame();
+    frame->Show(true);
+    return true;
+}
+ 
+MyFrame::MyFrame()
+    : wxFrame(nullptr, wxID_ANY, "Hello World")
+{
+    wxButton* btn = new wxButton(this, wxID_ANY, "Click me",wxPoint(10,10), wxSize(150,50));
+    wxMenu *menuFile = new wxMenu;
+    menuFile->Append(ID_Hello, "&Hello...\tCtrl-H",
+                     "Help string shown in status bar for this menu item");
+    menuFile->AppendSeparator();
+    menuFile->Append(wxID_EXIT);
+ 
+    wxMenu *menuHelp = new wxMenu;
+    menuHelp->Append(wxID_ABOUT);
+ 
+    wxMenuBar *menuBar = new wxMenuBar;
+    menuBar->Append(menuFile, "&File");
+    menuBar->Append(menuHelp, "&Help");
+ 
+    SetMenuBar( menuBar );
+ 
+    CreateStatusBar();
+    SetStatusText("Welcome to wxWidgets!");
+ 
+    Bind(wxEVT_MENU, &MyFrame::OnHello, this, ID_Hello);
+    Bind(wxEVT_MENU, &MyFrame::OnAbout, this, wxID_ABOUT);
+    Bind(wxEVT_MENU, &MyFrame::OnExit, this, wxID_EXIT);
+}
+ 
+void MyFrame::OnExit(wxCommandEvent& event)
+{
+    Close(true);
+}
+ 
+void MyFrame::OnAbout(wxCommandEvent& event)
+{
+    wxMessageBox("This is a wxWidgets Hello World example",
+                 "About Hello World", wxOK | wxICON_INFORMATION);
+}
+ 
+void MyFrame::OnHello(wxCommandEvent& event)
+{
+    wxLogMessage("Hello world from wxWidgets!");
+}
+
+IMPLEMENT_APP_NO_MAIN(MyApp);
+IMPLEMENT_WX_THEME_SUPPORT;
 
 int main(int argc, char *argv[])
 {
-    /* Initialize Google’s logging library. */
-    google::ParseCommandLineFlags(&argc, &argv, true);
-    // If not specified, use default log path
-    if(FLAGS_log_dir == "") {
-        FLAGS_log_dir = DEFAULT_LOG_PATH;
-    }
-    // Check if the log directory exists, and create it if it doesnt
-    if (!std::filesystem::exists(FLAGS_log_dir)) {
-        std::filesystem::create_directories(FLAGS_log_dir);
-    }
-    google::InitGoogleLogging(argv[0]);
-    
-    /* Start the application */
-    LOG(INFO) << "--- Starting Application ---";
-    mynamespace::MyClass mc;
-    
+    wxEntryStart( argc, argv );
+    wxTheApp->CallOnInit();
+    wxTheApp->OnRun();
+
     return 0;
 }
