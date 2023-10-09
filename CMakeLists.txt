@@ -40,6 +40,9 @@ add_subdirectory(src)
 # add the apps containing the app source files
 add_subdirectory(apps)
 
+set(IMGUI_DIR ${CMAKE_SOURCE_DIR}/dependencies/imgui)
+include(cmake/buildImgui.cmake)
+
 # add the tests containing the unit tests source files
 if((CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME OR MODERN_CMAKE_BUILD_TESTING)
    AND BUILD_TESTING)
