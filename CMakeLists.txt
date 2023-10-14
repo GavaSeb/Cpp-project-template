@@ -16,6 +16,8 @@ set(LIB_NAME ${PROJECT_NAME})
 set(APP_NAME ${PROJECT_NAME}_app)
 set(TEST_NAME ${PROJECT_NAME}_test)
 
+enable_testing()
+
 # Only do these if this is the main project, and not if it is included through add_subdirectory
 if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 

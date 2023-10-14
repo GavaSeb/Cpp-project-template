@@ -37,6 +37,11 @@ For other options, check glog documentation.
 ./build/tests/MyProject_test
 ```
 
+Or
+```bash
+cmake --build build --target test
+```
+
 To collect code coverage information, run CMake with the `-DENABLE_TEST_COVERAGE=1` option.
 
 ## Documentation (requires Doxygen)
