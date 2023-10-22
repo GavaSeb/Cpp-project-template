@@ -1,6 +1,7 @@
 #include <string>
 #include <filesystem>
 #include <glog/logging.h>
+#include <gflags/gflags.h>
 
 // Project specific
 #include "MyClass.hpp"
@@ -11,7 +12,7 @@ const std::string DEFAULT_LOG_PATH{ "./logs" };
 int main(int argc, char *argv[])
 {
     /* Initialize Google’s logging library. */
-    google::ParseCommandLineFlags(&argc, &argv, true);
+    gflags::ParseCommandLineFlags(&argc, &argv, true);
     // If not specified, use default log path
     if(FLAGS_log_dir == "") {
         FLAGS_log_dir = DEFAULT_LOG_PATH;
